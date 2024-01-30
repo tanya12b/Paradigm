@@ -1,0 +1,32 @@
+//SIT315 Programming Paradigms
+//Module1 :Real-time and Embedded Systems
+// TaskM1.T1P: Build a simple Sense-Think-Act Board
+const int PirSensor = 2;     // connected PIR sensor signal pin to digital pin 2
+const int LedPin = 3;        // connect LED anode to digital pin 3
+
+void setup() {
+  pinMode(PirSensor, INPUT);  // Motion sensor: input
+  pinMode(LedPin, OUTPUT);    // LED sensor: output
+  Serial.begin(9600);               // Initializing the serial communication
+}
+
+void loop() {
+  int PirSensorValue = digitalRead(PirSensor);  // Read the motion sensor value
+
+  Serial.print("Motion Sensor Value: ");
+  Serial.println(PirSensorValue);
+
+  if (PirSensorValue == HIGH) {
+    // when Motion is detected 
+    digitalWrite(LedPin, HIGH); // LED turns ON
+    Serial.println("Motion is Detected!!!");
+    delay(500);                        // Adjust the delay as needed
+    digitalWrite(LedPin, LOW);  // LED turns OFF
+  } else {
+    // when there is no motion
+    digitalWrite(LedPin, LOW);  // =LED turns OFF
+    Serial.println("No Motion Detected!!!");
+  }
+
+  delay(1000);  // Added delay 
+}
